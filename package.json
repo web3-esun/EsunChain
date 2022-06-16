@@ -1,0 +1,27 @@
+{
+  "name": "esunchain",
+  "version": "1.0.0",
+  "description": "an experimental blockchain for Esun bank internal Guild learning group",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/web3-esun/EsunChain.git"
+  },
+  "author": "Philip Wang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/web3-esun/EsunChain/issues"
+  },
+  "homepage": "https://github.com/web3-esun/EsunChain#readme",
+  "dependencies": {
+    "crypto-js": "^4.1.1",
+    "elliptic": "^6.5.4",
+    "fastify": "^4.0.3",
+    "ws": "^8.8.0"
+  }
+}
