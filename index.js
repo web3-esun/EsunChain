@@ -1,13 +1,16 @@
-import Block from './src/block.js';
+import Transaction from './src/transaction.js';
 import Blockchain from './src/blockchain.js';
 
 const EsunCoin = new Blockchain();
-EsunCoin.addBlock(new Block(1, '02/01/2022', { amount: 100 }));
 
-EsunCoin.addBlock(new Block(2, '03/01/2022', 'GG'));
+EsunCoin.createTransaction(new Transaction('address1', 'address2', 100));
+EsunCoin.createTransaction(new Transaction('address1', 'address2', 200));
+EsunCoin.createTransaction(new Transaction('address2', 'address3', 400));
 
-EsunCoin.addBlock(new Block(3, '04/01/2022', { amount: 22323 }));
+EsunCoin.minePendingTransactions('addressX');
+EsunCoin.minePendingTransactions('address1');
 
-EsunCoin.addBlock(new Block(4, '05/01/2022', { amount: 1111 }));
+//console.log(JSON.stringify(EsunCoin, null, 4));
 
-console.log(JSON.stringify(EsunCoin, null, 4));
+console.log(EsunCoin.getBalanceOfAddress('address1'))
+console.log(EsunCoin.getBalanceOfAddress('addressX'))
