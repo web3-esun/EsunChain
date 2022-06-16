@@ -1,16 +1,28 @@
 import Transaction from "./src/transaction.js";
 import Blockchain from "./src/blockchain.js";
+import Keygen, {ec} from "./src/keygen.js";
 
+// my wallet
+const myWallet = new Keygen();
+const myWalletAddress = myWallet.getPublicKey();
+
+// your wallet
+const yourWallet = new Keygen();
+const yourWalletAddress = yourWallet.getPublicKey();
+
+// main chain
 const EsunChain = new Blockchain();
 
-EsunChain.createTransaction(new Transaction("address1", "address2", 100));
-EsunChain.createTransaction(new Transaction("address1", "address2", 200));
-EsunChain.createTransaction(new Transaction("address2", "address3", 400));
+// create transaction
+const transaction = new Transaction(myWalletAddress, yourWalletAddress, 100);
+transaction.signTransaction(myWallet.getKey());
 
-EsunChain.minePendingTransactions("addressX");
-EsunChain.minePendingTransactions("address1");
+EsunChain.addTransaction(transaction);
 
-//console.log(JSON.stringify(EsunChain, null, 4));
+EsunChain.minePendingTransactions(myWalletAddress);
+EsunChain.minePendingTransactions(yourWalletAddress);
 
-console.log(EsunChain.getBalanceOfAddress("address1"));
-console.log(EsunChain.getBalanceOfAddress("addressX"));
+console.log(JSON.stringify(EsunChain, null, 4));
+
+console.log(EsunChain.getBalanceOfAddress(myWalletAddress));
+console.log(EsunChain.getBalanceOfAddress(yourWalletAddress));
