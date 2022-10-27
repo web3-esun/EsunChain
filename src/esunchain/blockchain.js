@@ -56,7 +56,13 @@ class Blockchain {
     return balance;
   }
 
-  isChainValid() {
+  isValidChain() {
+    if (
+      JSON.stringify(this.chain[0]) !==
+      JSON.stringify(this.createGenesisBlock())
+    )
+      return false;
+
     for (let i = 1; i < this.chain.length; ++i) {
       const currentBlock = this.chain[i];
       const previousBlock = this.chain[i - 1];
@@ -73,6 +79,19 @@ class Blockchain {
       }
     }
     return true;
+  }
+
+  replaceChain(newChain) {
+    if (newChain.length <= this.chain.length) {
+      console.log("Recieved chain is not longer than the current chain");
+      return;
+    } else if (!this.isValidChain(newChain)) {
+      console.log("Recieved chain is invalid");
+      return;
+    }
+
+    console.log("Replacing the current chain with new chain");
+    this.chain = newChain;
   }
 }
 

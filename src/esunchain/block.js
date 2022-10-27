@@ -6,7 +6,7 @@ class Block {
     this.transactions = transactions;
     this.previousHash = previousHash;
     this.hash = this.calculateHash();
-    this.nounce = 0;
+    this.nonce = 0;
   }
 
   calculateHash() {
@@ -14,7 +14,7 @@ class Block {
       this.previousHash +
         this.timestamp +
         JSON.stringify(this.transactions) +
-        this.nounce
+        this.nonce
     ).toString();
   }
 
@@ -22,7 +22,7 @@ class Block {
     while (
       this.hash.substring(0, difficulty) !== Array(difficulty + 1).join("0")
     ) {
-      this.nounce += 1;
+      this.nonce += 1;
       this.hash = this.calculateHash();
     }
     console.log(`Block mined: ${this.hash}`);
